@@ -30,7 +30,7 @@ class Player {
         }
 
         fun loadData(player: org.bukkit.entity.Player): PlayerData {
-            val data = Yaml.read("${plugin.dataFolder}/player/${player.uniqueId}.yml")
+            val data = Yaml.read("player/${player.uniqueId}.yml")
             val lastPlayed = data?.get("lastPlayed")?.toString()
             val default = PlayerData()
             return PlayerData(
@@ -52,9 +52,9 @@ class Player {
                 "money" to saveData.money,
                 "cash" to saveData.cash,
                 "playtime" to saveData.playtime,
-                "lastPlayed" to saveData.lastPlayed,
+                "lastPlayed" to saveData.lastPlayed.toString(),
             )
-            Yaml.write("${plugin.dataFolder}/player/${player.uniqueId}.yml", hashMap)
+            Yaml.write("player/${player.uniqueId}.yml", hashMap)
             data[player.uniqueId] = loadData(player)
         }
 

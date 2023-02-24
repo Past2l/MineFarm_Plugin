@@ -1,16 +1,16 @@
 package me.past2l.minefarm
 
 import me.past2l.api.PluginManager
-import me.past2l.api.command.CustomGUICommand
-import me.past2l.api.command.CustomNPCCommand
-import me.past2l.api.entity.CustomNPC
+import me.past2l.npc_gui.command.CustomGUICommand
+import me.past2l.npc_gui.command.CustomNPCCommand
+import me.past2l.npc_gui.entity.CustomNPC
 import me.past2l.api.entity.NPC
 import me.past2l.api.entity.Player
 import me.past2l.api.event.GUIEvent
 import me.past2l.api.event.NPCEvent
 import me.past2l.api.event.PacketEvent
 import me.past2l.api.event.PlayerEvent
-import me.past2l.api.gui.CustomGUI
+import me.past2l.npc_gui.gui.CustomGUI
 import me.past2l.api.gui.Scoreboard
 import me.past2l.api.gui.TabList
 import me.past2l.api.nms.NMS

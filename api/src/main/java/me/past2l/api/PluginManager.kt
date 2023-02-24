@@ -1,5 +1,6 @@
 package me.past2l.api
 
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 class PluginManager {
@@ -11,8 +12,8 @@ class PluginManager {
         }
 
         fun reload() {
-            this.plugin.onDisable()
-            this.plugin.onEnable()
+            Bukkit.getPluginManager().disablePlugin(plugin)
+            Bukkit.getPluginManager().enablePlugin(plugin)
         }
     }
 }

@@ -55,20 +55,34 @@
     </build>
 
     <dependencies>
+        <!-- Plugin Base Version -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- API -->
         <dependency>
             <groupId>me.past2l</groupId>
             <artifactId>api</artifactId>
             <version>api</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>true</optional>
         </dependency>
+
+        <!-- Versions -->
+        <dependency>
+            <groupId>me.past2l</groupId>
+            <artifactId>v1_12_R1</artifactId>
+            <version>v1_12_R1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.past2l</groupId>
+            <artifactId>v1_19_R1</artifactId>
+            <version>v1_19_R1</version>
+        </dependency>
+
+        <!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>

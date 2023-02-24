@@ -1,6 +1,5 @@
 package me.past2l.api.util
 
-import me.past2l.api.PluginManager
 import me.past2l.api.type.config.*
 import me.past2l.api.type.config.text.ConfigText
 import me.past2l.api.type.config.text.ConfigTextShop
@@ -17,7 +16,6 @@ import java.util.*
 
 class Config {
     companion object {
-        private val plugin = PluginManager.plugin
         private lateinit var config: ConfigData
 
         lateinit var serverName: String
@@ -31,7 +29,7 @@ class Config {
         lateinit var text: ConfigText
 
         fun init() {
-            val data = Yaml.read("${plugin.dataFolder}/config.yml")
+            val data = Yaml.read("config.yml")
             val enable = data?.get("enable") as HashMap<*, *>?
             val tabList = data?.get("tabList") as HashMap<*, *>?
             val scoreboard = data?.get("scoreboard") as HashMap<*, *>?
@@ -120,7 +118,7 @@ class Config {
                     ),
                 ),
             )
-            Yaml.write("${plugin.dataFolder}/config.yml", data)
+            Yaml.write("config.yml", data)
         }
 
         fun format(

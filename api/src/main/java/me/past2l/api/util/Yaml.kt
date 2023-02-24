@@ -1,13 +1,15 @@
 package me.past2l.api.util
 
+import me.past2l.api.PluginManager
 import org.yaml.snakeyaml.DumperOptions
 import java.io.*
-import java.nio.charset.StandardCharsets
 
 class Yaml {
     companion object {
+        private val plugin = PluginManager.plugin
+
         fun write(path: String, map: HashMap<String, *>) {
-            val file = File(path)
+            val file = File(plugin.dataFolder, path)
             try {
                 if (!file.exists()) {
                     if (!file.parentFile.exists()) file.parentFile.mkdirs()
@@ -18,7 +20,7 @@ class Yaml {
                 options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
                 options.isPrettyFlow = true
                 val yaml = org.yaml.snakeyaml.Yaml(options)
-                val writer: Writer = OutputStreamWriter(FileOutputStream(file), StandardCharsets.UTF_8)
+                val writer = OutputStreamWriter(FileOutputStream(file), Charsets.UTF_8)
                 yaml.dump(map, writer)
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -26,10 +28,10 @@ class Yaml {
         }
 
         fun read(path: String): HashMap<String, *>? {
-            val file = File(path)
+            val file = File(plugin.dataFolder, path)
             if (!file.exists()) return null
             try {
-                return org.yaml.snakeyaml.Yaml().load(InputStreamReader(FileInputStream(file), StandardCharsets.UTF_8))
+                return org.yaml.snakeyaml.Yaml().load(InputStreamReader(FileInputStream(file), Charsets.UTF_8))
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }

@@ -1,5 +1,6 @@
-package me.past2l.api.gui
+package me.past2l.npc_gui.gui
 
+import me.past2l.api.gui.GUI
 import me.past2l.api.type.gui.GUIData
 import me.past2l.api.type.gui.GUIGachaItem
 import me.past2l.api.type.gui.GUIItem
@@ -19,7 +20,7 @@ class CustomGUI {
         val data = hashMapOf<String, GUIData>()
 
         fun open(gui: String?, player: Player) {
-            this.gui[gui]?.open(player)
+            Companion.gui[gui]?.open(player)
         }
 
         fun init() {
@@ -43,8 +44,8 @@ class CustomGUI {
                 "gacha" -> gachaTemplate(gui, data)
                 else -> return
             }
-            this.gui[data.id] = gui
-            this.data[data.id] = data
+            Companion.gui[data.id] = gui
+            Companion.data[data.id] = data
             saveData(data)
         }
 
@@ -55,13 +56,13 @@ class CustomGUI {
         }
 
         fun reload() {
-            this.data.values.forEach { reload(it) }
+            data.values.forEach { reload(it) }
         }
 
         fun remove(data: GUIData) {
             File.remove("gui/${data.id}.yml")
-            this.gui.remove(data.id)
-            this.data.remove(data.id)
+            gui.remove(data.id)
+            Companion.data.remove(data.id)
         }
 
         fun loadData(path: String): GUIData? {

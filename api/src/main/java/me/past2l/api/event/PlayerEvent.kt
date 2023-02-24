@@ -29,8 +29,7 @@ class PlayerEvent: Listener {
     fun onQuit(event: PlayerQuitEvent) {
         val data = Player.data[event.player.uniqueId]!!
         val now = ZonedDateTime.now(ZoneId.of(Config.timezone))
-        data.playtime += (now.toInstant().epochSecond -
-            data.lastPlayed.toInstant().epochSecond) / (1000 * 60 * 60)
+        data.playtime += (now.toInstant().epochSecond - data.lastPlayed.toInstant().epochSecond) / 3600.0
         data.lastPlayed = now
         Player.saveData(event.player)
         Player.data.remove(event.player.uniqueId)

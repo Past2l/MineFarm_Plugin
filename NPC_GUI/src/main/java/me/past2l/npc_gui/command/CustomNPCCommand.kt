@@ -1,6 +1,6 @@
-package me.past2l.api.command
+package me.past2l.npc_gui.command
 
-import me.past2l.api.entity.CustomNPC
+import me.past2l.npc_gui.entity.CustomNPC
 import me.past2l.api.type.entity.NPCData
 import me.past2l.api.type.interact.Interaction
 import me.past2l.api.util.Config

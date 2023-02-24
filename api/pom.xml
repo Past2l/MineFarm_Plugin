@@ -68,17 +68,11 @@
             <groupId>me.past2l</groupId>
             <artifactId>v1_12_R1</artifactId>
             <version>v1_12_R1</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>me.past2l</groupId>
             <artifactId>v1_19_R1</artifactId>
             <version>v1_19_R1</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>true</optional>
         </dependency>
 
         <!-- Other Dependencies -->

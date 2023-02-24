@@ -1,6 +1,7 @@
-package me.past2l.api.entity
+package me.past2l.npc_gui.entity
 
-import me.past2l.api.gui.CustomGUI
+import me.past2l.api.entity.NPC
+import me.past2l.npc_gui.gui.CustomGUI
 import me.past2l.api.type.entity.NPCData
 import me.past2l.api.type.interact.Interaction
 import me.past2l.api.type.skin.SkinResult

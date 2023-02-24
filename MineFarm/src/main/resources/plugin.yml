@@ -1,6 +1,6 @@
 name: MineFarm
 version: '${project.version}'
-main: me.past2l.api.MineFarm
+main: me.past2l.minefarm.MineFarm
 authors: [ Green0121, Past2l ]
 load: STARTUP
 description: Custom Plugin for MineFarm
