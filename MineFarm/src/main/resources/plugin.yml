@@ -1,0 +1,42 @@
+name: MineFarm
+version: '${project.version}'
+main: me.past2l.api.MineFarm
+authors: [ Green0121, Past2l ]
+load: STARTUP
+description: Custom Plugin for MineFarm
+website: https://github.com/past2l
+
+commands:
+  minefarm:
+    description: Command for Manage this plugin.
+    permission: minefarm.minefarm
+  npc:
+    description: Command for NPC plugin.
+    permission: minefarm.npc
+  gui:
+    description: Command for GUI plugin.
+    permission: minefarm.gui
+  ender_chest:
+    description: Command for Open Ender Chest.
+    permission: minefarm.ender_chest
+
+permissions:
+  minefarm.*:
+    description: Gives access to all MineFarm Commands
+    children:
+      minefarm.minefarm: true
+      minefarm.npc: true
+      minefarm.gui: true
+      minefarm.ender_chest: true
+  minefarm.minefarm:
+    description: Give access to use MineFarm Plugin Manage Command
+    default: op
+  minefarm.npc:
+    description: Give access to use MineFarm NPC Command
+    default: op
+  minefarm.gui:
+    description: Give access to use MineFarm GUI Command
+    default: op
+  minefarm.ender_chest:
+    description: Give access to use MineFarm Chest Command
+    default: op
