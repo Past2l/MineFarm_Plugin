@@ -93,62 +93,62 @@ class Config: Config() {
         ) = API.format(str, player) point@{
             var result = it
             if (npc != null) {
-                result = result.replace("$(npc.id)", npc.id)
-                    .replace("$(npc.uuid)", npc.uuid.toString())
-                    .replace("$(npc.name)", npc.name)
+                result = result.replace("%npc.id%", npc.id)
+                    .replace("%npc.uuid%", npc.uuid.toString())
+                    .replace("%npc.name%", npc.name)
             }
             if (shopItem != null) {
-                result = result.replace("$(shop.item.moneyType)", shopItem.moneyType)
+                result = result.replace("%shop.item.moneyType%", shopItem.moneyType)
                     .replace(
-                        "$(shop.item.buyPrice)",
+                        "%shop.item.buyPrice%",
                         DecimalFormat("#,###").format(shopItem.price ?: 0.0)
                     )
                     .replace(
-                        "$(shop.item.previousBuyPrice)",
+                        "%shop.item.previousBuyPrice%",
                         DecimalFormat("#,###").format(shopItem.previousPrice ?: 0.0)
                     )
                     .replace(
-                        "$(shop.item.sellPrice)",
+                        "%shop.item.sellPrice%",
                         DecimalFormat("#,###").format(shopItem.sellPrice ?: 0.0)
                     )
                     .replace(
-                        "$(shop.item.previousSellPrice)",
+                        "%shop.item.previousSellPrice%",
                         DecimalFormat("#,###").format(shopItem.previousSellPrice ?: 0.0)
                     )
                     .replace(
-                        "$(shop.item.gap.buyPrice)",
+                        "%shop.item.gap.buyPrice%",
                         if (!shopItem.priceChange) ""
                         else {
                             val gap = (shopItem.price ?: 0.0) - (shopItem.previousPrice ?: shopItem.price ?: 0.0)
                             if (gap < 1 && gap > -1) "(-)"
                             else if (gap > 0)
-                                "&r&f(§c▲${DecimalFormat("#,###").format(gap)}§f)"
+                                "&r&f(&c▲${DecimalFormat("#,###").format(gap)}&f)"
                             else
-                                "&r&f(§9▼${DecimalFormat("#,###").format(-gap)}§f)"
+                                "&r&f(&9▼${DecimalFormat("#,###").format(-gap)}&f)"
                         }
                     )
                     .replace(
-                        "$(shop.item.gap.sellPrice)",
+                        "%shop.item.gap.sellPrice%",
                         if (!shopItem.priceChange) ""
                         else {
                             val gap = (shopItem.sellPrice ?: 0.0) - (shopItem.previousSellPrice ?: shopItem.sellPrice ?: 0.0)
                             if (gap < 1 && gap > -1) "(-)"
                             else if (gap > 0)
-                                "(§c▲${DecimalFormat("#,###").format(gap)}§f)"
+                                "(&c▲${DecimalFormat("#,###").format(gap)}&f)"
                             else
-                                "(§9▼${DecimalFormat("#,###").format(-gap)}§f)"
+                                "(&9▼${DecimalFormat("#,###").format(-gap)}&f)"
                         }
                     )
                 if (shopInteraction != null) {
                     result = result.replace(
-                        "$(shop.item.name)",
-                        if (shopInteraction.name.isNotEmpty()) shopInteraction.name + "§r"
+                        "%shop.item.name%",
+                        if (shopInteraction.name.isNotEmpty()) shopInteraction.name + "&r"
                         else ""
                     )
-                        .replace("$(shop.item.type)", shopInteraction.type)
-                        .replace("$(shop.item.amount)", shopInteraction.amount.toString())
+                        .replace("%shop.item.type%", shopInteraction.type)
+                        .replace("%shop.item.amount%", shopInteraction.amount.toString())
                         .replace(
-                            "$(shop.item.price)",
+                            "%shop.item.price%",
                             DecimalFormat("#,###").format(
                                 when (shopInteraction.type) {
                                     "구매" -> (shopItem.price ?: 0.0) * shopInteraction.amount
@@ -159,7 +159,8 @@ class Config: Config() {
                         )
                 }
             }
-            return@point result
+            return@point result.replace("%money%", config.money.money)
+                .replace("%cash%", config.money.cash)
         }
     }
 }
