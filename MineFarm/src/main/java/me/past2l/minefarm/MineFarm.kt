@@ -1,25 +1,24 @@
 package me.past2l.minefarm
 
 import me.past2l.api.PluginManager
-import me.past2l.npc_gui.command.CustomGUICommand
-import me.past2l.npc_gui.command.CustomNPCCommand
-import me.past2l.npc_gui.entity.CustomNPC
+import me.past2l.minefarm.entity.CustomNPC
 import me.past2l.api.entity.NPC
 import me.past2l.api.entity.Player
 import me.past2l.api.event.GUIEvent
 import me.past2l.api.event.NPCEvent
 import me.past2l.api.event.PacketEvent
 import me.past2l.api.event.PlayerEvent
-import me.past2l.npc_gui.gui.CustomGUI
 import me.past2l.api.gui.Scoreboard
 import me.past2l.api.gui.TabList
 import me.past2l.api.nms.NMS
 import me.past2l.api.packet.Packet
 import me.past2l.api.scheduler.NPCSkinReloadScheduler
 import me.past2l.api.scheduler.ScoreboardScheduler
-import me.past2l.api.util.Config
+import me.past2l.minefarm.util.Config
+import me.past2l.minefarm.command.CustomGUICommand
+import me.past2l.minefarm.command.CustomNPCCommand
 import me.past2l.minefarm.command.EnderChestGUICommand
-import me.past2l.minefarm.command.MineFarmCommand
+import me.past2l.minefarm.gui.CustomGUI
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty
 import org.bukkit.plugin.java.JavaPlugin
@@ -48,8 +47,6 @@ class MineFarm: JavaPlugin() {
     }
 
     private fun initCommands() {
-        getCommand(MineFarmCommand.name)?.executor = MineFarmCommand()
-        getCommand(MineFarmCommand.name)?.tabCompleter = MineFarmCommand()
         getCommand(CustomNPCCommand.name)?.executor = CustomNPCCommand()
         getCommand(CustomNPCCommand.name)?.tabCompleter = CustomNPCCommand()
         getCommand(CustomGUICommand.name)?.executor = CustomGUICommand()

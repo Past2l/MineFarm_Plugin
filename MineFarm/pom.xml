@@ -116,11 +116,6 @@
             <artifactId>api</artifactId>
             <version>api</version>
         </dependency>
-        <dependency>
-            <groupId>me.past2l</groupId>
-            <artifactId>NPC_GUI</artifactId>
-            <version>NPC+GUI</version>
-        </dependency>
 
         <!-- Versions -->
         <dependency>

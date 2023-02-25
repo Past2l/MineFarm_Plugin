@@ -1,4 +1,4 @@
-package me.past2l.api.type.gui
+package me.past2l.minefarm.type.gui
 
 data class GUIData (
     var type: String,

@@ -7,9 +7,6 @@ description: Custom Plugin for MineFarm
 website: https://github.com/past2l
 
 commands:
-  minefarm:
-    description: Command for Manage this plugin.
-    permission: minefarm.minefarm
   npc:
     description: Command for NPC plugin.
     permission: minefarm.npc
@@ -24,13 +21,9 @@ permissions:
   minefarm.*:
     description: Gives access to all MineFarm Commands
     children:
-      minefarm.minefarm: true
       minefarm.npc: true
       minefarm.gui: true
       minefarm.ender_chest: true
-  minefarm.minefarm:
-    description: Give access to use MineFarm Plugin Manage Command
-    default: op
   minefarm.npc:
     description: Give access to use MineFarm NPC Command
     default: op

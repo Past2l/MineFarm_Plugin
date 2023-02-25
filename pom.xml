@@ -22,9 +22,6 @@
         <module>v1_12_R1</module>
         <module>v1_19_R1</module>
 
-        <!-- Custom NPC & Custom GUI -->
-        <module>NPC_GUI</module>
-
         <!-- MineFarm -->
         <module>MineFarm</module>
     </modules>

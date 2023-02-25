@@ -1,4 +1,4 @@
-package me.past2l.api.type.config
+package me.past2l.minefarm.type.config
 
 data class ConfigMoney(
     val money: String = "원", // 무료 화폐

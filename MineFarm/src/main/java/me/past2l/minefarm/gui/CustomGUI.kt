@@ -1,16 +1,16 @@
-package me.past2l.npc_gui.gui
+package me.past2l.minefarm.gui
 
 import me.past2l.api.gui.GUI
-import me.past2l.api.type.gui.GUIData
-import me.past2l.api.type.gui.GUIGachaItem
-import me.past2l.api.type.gui.GUIItem
-import me.past2l.api.type.gui.GUIShopItem
+import me.past2l.minefarm.type.gui.GUIData
+import me.past2l.minefarm.type.gui.GUIGachaItem
+import me.past2l.minefarm.type.gui.GUIItem
+import me.past2l.minefarm.type.gui.GUIShopItem
 import me.past2l.api.type.interact.Interaction
-import me.past2l.api.type.shop.ShopInteraction
-import me.past2l.api.util.Config
+import me.past2l.minefarm.type.shop.ShopInteraction
 import me.past2l.api.util.File
 import me.past2l.api.util.Item
 import me.past2l.api.util.Yaml
+import me.past2l.minefarm.util.Config
 import org.bukkit.entity.Player
 
 class CustomGUI {

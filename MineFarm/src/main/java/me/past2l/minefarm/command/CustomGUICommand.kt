@@ -1,11 +1,11 @@
-package me.past2l.npc_gui.command
+package me.past2l.minefarm.command
 
-import me.past2l.npc_gui.gui.CustomGUI
+import me.past2l.minefarm.gui.CustomGUI
 import me.past2l.api.gui.GUI
-import me.past2l.api.type.gui.GUIData
-import me.past2l.api.type.gui.GUIGachaItem
-import me.past2l.api.type.gui.GUIItem
-import me.past2l.api.type.gui.GUIShopItem
+import me.past2l.minefarm.type.gui.GUIData
+import me.past2l.minefarm.type.gui.GUIGachaItem
+import me.past2l.minefarm.type.gui.GUIItem
+import me.past2l.minefarm.type.gui.GUIShopItem
 import me.past2l.api.type.interact.Interaction
 import me.past2l.api.util.Config
 import me.past2l.api.util.Item
@@ -248,13 +248,15 @@ class CustomGUICommand: CommandExecutor, TabExecutor {
                                         val newItems = arrayListOf<GUIItem>()
                                         for (idx in 0 until data.line * 9)
                                             if (gui.getItem(idx) != null)
-                                                newItems.add(GUIItem(
+                                                newItems.add(
+                                                    GUIItem(
                                                     Item.serialize(gui.getItem(idx)!!),
                                                     idx,
                                                     oldItems.find { it.slot == idx }?.interaction,
                                                     oldItems.find { it.slot == idx }?.shop,
                                                     oldItems.find { it.slot == idx }?.gacha,
-                                                ))
+                                                )
+                                                )
                                         data.items = newItems
                                         CustomGUI.reload(data)
                                         event.player.sendMessage("§a${args[1]}§r GUI의 아이템이 수정되었습니다.")

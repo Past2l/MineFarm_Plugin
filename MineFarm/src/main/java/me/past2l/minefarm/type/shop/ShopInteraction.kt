@@ -1,4 +1,4 @@
-package me.past2l.api.type.shop
+package me.past2l.minefarm.type.shop
 
 data class ShopInteraction(
     val name: String,
