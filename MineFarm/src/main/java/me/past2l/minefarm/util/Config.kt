@@ -17,6 +17,7 @@ import java.text.DecimalFormat
 class Config: Config() {
     companion object MineFarm {
         private lateinit var config: ConfigData
+        private var forceReplace = false
 
         lateinit var serverName: String
         lateinit var timezone: String
@@ -34,7 +35,10 @@ class Config: Config() {
             val shopText = text?.get("shop") as HashMap<*, *>?
             val default = ConfigData()
 
-            config = ConfigData(
+            forceReplace = it?.get("forceReplace")?.toString()?.toBoolean() ?: false
+
+            config = if (forceReplace) default
+            else ConfigData(
                 money = ConfigMoney(
                     money = money?.get("money")?.toString() ?: default.money.money,
                     cash = money?.get("cash")?.toString() ?: default.money.cash,

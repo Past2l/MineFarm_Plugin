@@ -4,6 +4,7 @@ import me.past2l.api.type.config.*
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.io.Serializable
+import java.text.DecimalFormat
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -12,6 +13,7 @@ import java.util.*
 open class Config {
     companion object API {
         lateinit var config: ConfigData
+        private var forceReplace = false
 
         lateinit var serverName: String
         lateinit var timezone: String
@@ -28,7 +30,10 @@ open class Config {
             val scoreboard = data?.get("scoreboard") as HashMap<*, *>?
             val default = ConfigData()
 
-            config = ConfigData(
+            forceReplace = data?.get("forceReplace")?.toString()?.toBoolean() ?: false
+
+            config = if (forceReplace) default
+            else ConfigData(
                 serverName = data?.get("serverName")?.toString() ?: default.serverName,
                 timezone = data?.get("timezone")?.toString() ?: default.timezone,
                 consolePrefix = data?.get("consolePrefix")?.toString() ?: default.consolePrefix,
@@ -80,6 +85,7 @@ open class Config {
                 ),
             )
             option?.let { data.putAll(it()) }
+            if (forceReplace) data["forceReplace"] = true
             Yaml.write("config.yml", data)
         }
 
@@ -91,10 +97,15 @@ open class Config {
             var result = str ?: return ""
             val temp = UUID.randomUUID().toString()
             val now = ZonedDateTime.now(ZoneId.of(config.timezone))
-            if (player != null)
+            if (player != null) {
+                val playerData = me.past2l.api.entity.Player.data[player.uniqueId]!!
                 result = result.replace("%player.name%", player.name)
                     .replace("%player.op%", player.isOp.toString())
                     .replace("%player.uuid%", player.uniqueId.toString())
+                    .replace("%player.prefix%", playerData.prefix)
+                    .replace("%player.prefix.exist%", playerData.prefix.ifEmpty { "없음" })
+                    .replace("%player.playtime%", DecimalFormat("#.#").format(playerData.playtime))
+            }
             option?.let { result = it(result) }
             return result
                 .replace("\\&", temp)

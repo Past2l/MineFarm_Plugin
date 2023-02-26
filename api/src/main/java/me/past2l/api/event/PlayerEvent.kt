@@ -44,6 +44,7 @@ class PlayerEvent: Listener {
     fun onChat(event: AsyncPlayerChatEvent) {
         if (Config.enable.chat)
             event.format = Config.format(Config.chat, event.player)
-                .replace("$(chat.message)", event.message)
+                .replace("%chat.message%", event.message)
+                .replace("%", "%%")
     }
 }

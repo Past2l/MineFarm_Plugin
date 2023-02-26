@@ -6,6 +6,7 @@ data class ConfigScoreboard(
         "&8%date.year%/%date.month%/%date.day% %date.hour%:%date.minute%&r",
         "",
         "name : &6%player.name%&r",
+        "prefix : &6%player.prefix.exist%&r",
         "op: &6%player.op%&r",
     ),
 )
