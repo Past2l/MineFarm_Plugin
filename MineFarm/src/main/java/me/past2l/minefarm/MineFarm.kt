@@ -18,6 +18,7 @@ import me.past2l.minefarm.util.Config
 import me.past2l.minefarm.command.CustomGUICommand
 import me.past2l.minefarm.command.CustomNPCCommand
 import me.past2l.minefarm.command.EnderChestGUICommand
+import me.past2l.minefarm.command.TestCommand
 import me.past2l.minefarm.gui.CustomGUI
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty
@@ -47,6 +48,8 @@ class MineFarm: JavaPlugin() {
     }
 
     private fun initCommands() {
+        getCommand(TestCommand.name)?.executor = TestCommand()
+        getCommand(TestCommand.name)?.tabCompleter = TestCommand()
         getCommand(CustomNPCCommand.name)?.executor = CustomNPCCommand()
         getCommand(CustomNPCCommand.name)?.tabCompleter = CustomNPCCommand()
         getCommand(CustomGUICommand.name)?.executor = CustomGUICommand()
