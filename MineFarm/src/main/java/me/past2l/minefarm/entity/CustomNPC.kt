@@ -19,7 +19,7 @@ class CustomNPC {
         val config = hashMapOf<String, NPCData>()
         fun spawn(data: NPCData): NPC {
             val npc = NPC(data) {
-                when (data.interaction!!.type) {
+                when (data.interaction?.type) {
                     "gui" -> CustomGUI.open(data.interaction!!.id, it)
                     "text" -> it.sendMessage(Config.format(
                         data.interaction!!.id,
