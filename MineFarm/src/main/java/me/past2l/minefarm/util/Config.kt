@@ -163,8 +163,8 @@ class Config: Config() {
                         )
                 }
             }
-            return@point result.replace("%money%", config.money.money)
-                .replace("%cash%", config.money.cash)
+            return@point result.replace("%server.money%", config.money.money)
+                .replace("%server.cash%", config.money.cash)
         }
     }
 }

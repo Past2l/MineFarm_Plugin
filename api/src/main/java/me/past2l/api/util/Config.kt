@@ -46,6 +46,7 @@ open class Config {
                 tabList = ConfigTabList(
                     header = tabList?.get("header")?.toString() ?: default.tabList.header,
                     footer = tabList?.get("footer")?.toString() ?: default.tabList.footer,
+                    playerName = tabList?.get("playerName")?.toString() ?: default.tabList.playerName,
                 ),
                 scoreboard = ConfigScoreboard(
                     title = scoreboard?.get("title")?.toString() ?: default.scoreboard.title,
@@ -78,6 +79,7 @@ open class Config {
                 "tabList" to hashMapOf(
                     "header" to config.tabList.header,
                     "footer" to config.tabList.footer,
+                    "playerName" to config.tabList.playerName,
                 ),
                 "scoreboard" to hashMapOf(
                     "title" to config.scoreboard.title,
