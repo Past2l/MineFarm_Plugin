@@ -10,7 +10,7 @@ import me.past2l.api.gui.TabList
 import me.past2l.api.nms.NMS
 import me.past2l.api.packet.Packet
 import me.past2l.api.scheduler.NPCSkinReloadScheduler
-import me.past2l.api.scheduler.ScoreboardScheduler
+import me.past2l.api.scheduler.GUILoadScheduler
 import me.past2l.minefarm.util.Config
 import me.past2l.minefarm.command.CustomGUICommand
 import me.past2l.minefarm.command.CustomNPCCommand
@@ -109,12 +109,12 @@ class MineFarm: JavaPlugin() {
     }
 
     private fun initSchedulers() {
-        ScoreboardScheduler.init()
+        GUILoadScheduler.init()
         NPCSkinReloadScheduler.init()
     }
 
     private fun removeSchedulers() {
-        ScoreboardScheduler.remove()
+        GUILoadScheduler.remove()
         NPCSkinReloadScheduler.remove()
     }
 
