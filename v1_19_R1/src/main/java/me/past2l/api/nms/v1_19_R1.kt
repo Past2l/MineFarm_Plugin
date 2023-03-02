@@ -7,7 +7,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageDecoder
 import me.past2l.api.type.nms.NMS
 import me.past2l.api.type.entity.FakePlayer
-import net.minecraft.network.chat.IChatBaseComponent
+import net.minecraft.network.chat.IChatBaseComponent.ChatSerializer
 import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.*
 import net.minecraft.network.syncher.DataWatcherRegistry
@@ -26,10 +26,16 @@ class v1_19_R1(val plugin: JavaPlugin): NMS {
     private val channels: HashMap<UUID, Channel> = hashMapOf()
     private val interactNPC: HashMap<Int, Boolean> = hashMapOf()
 
+    private fun stringToComponent(str: String): String {
+        return "[${str.split("\n").joinToString(",") {
+            "{\"text\":\"${it}\"}"
+        }}]"
+    }
+
     override fun setTabList(player: Player, header: String, footer: String) {
         val packet = PacketPlayOutPlayerListHeaderFooter(
-            IChatBaseComponent.a(header),
-            IChatBaseComponent.a(footer)
+            ChatSerializer.a(stringToComponent(header)),
+            ChatSerializer.a(stringToComponent(footer))
         )
         val connection = (player as CraftPlayer).handle.b
         connection.a(packet)
