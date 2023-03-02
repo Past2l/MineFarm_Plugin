@@ -7,6 +7,9 @@ data class ConfigScoreboard(
         "",
         "name : &6%player.name%&r",
         "prefix : &6%player.prefix.exist%&r",
-        "op: &6%player.op%&r",
+        "op : &6%player.op%&r",
+        "money : &6%player.money%&r%server.money%",
+        "cash : &6%player.cash%&r%server.cash%",
+        "like : &d%player.like%&r",
     ),
 )

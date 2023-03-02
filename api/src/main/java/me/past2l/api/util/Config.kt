@@ -30,6 +30,7 @@ open class Config {
             val tabList = data?.get("tabList") as HashMap<*, *>?
             val scoreboard = data?.get("scoreboard") as HashMap<*, *>?
             val motd = data?.get("motd") as HashMap<*, *>?
+            val money = data?.get("money") as HashMap<*, *>?
             val default = ConfigData()
 
             forceReplace = data?.get("forceReplace")?.toString()?.toBoolean() ?: false
@@ -57,7 +58,11 @@ open class Config {
                 motd = ConfigMOTD(
                     content = motd?.get("content") as ArrayList<String>? ?: default.motd.content,
                     center = motd?.get("center")?.toString()?.toBoolean() ?: default.motd.center,
-                )
+                ),
+                money = ConfigMoney(
+                    money = money?.get("money")?.toString() ?: default.money.money,
+                    cash = money?.get("cash")?.toString() ?: default.money.cash,
+                ),
             )
 
             this.serverName = config.serverName
@@ -96,6 +101,10 @@ open class Config {
                     "content" to config.motd.content,
                     "center" to config.motd.center,
                 ),
+                "money" to hashMapOf(
+                    "money" to config.money.money,
+                    "cash" to config.money.cash,
+                ),
             )
             option?.let { data.putAll(it()) }
             if (forceReplace) data["forceReplace"] = true
@@ -118,6 +127,15 @@ open class Config {
                     .replace("%player.prefix%", playerData.prefix)
                     .replace("%player.prefix.exist%", playerData.prefix.ifEmpty { "없음" })
                     .replace("%player.playtime%", DecimalFormat("#.#").format(playerData.playtime))
+                    .replace("%player.money%",
+                        if (playerData.money == -1.0) "Infinity"
+                        else DecimalFormat("#,###").format(playerData.money)
+                    )
+                    .replace("%player.cash%",
+                        if (playerData.cash == -1.0) "Infinity"
+                        else DecimalFormat("#,###").format(playerData.cash)
+                    )
+                    .replace("%player.like%", DecimalFormat("#,###").format(playerData.like))
             }
             option?.let { result = it(result) }
             return result
@@ -131,6 +149,8 @@ open class Config {
                 .replace("%date.day%", now.format(DateTimeFormatter.ofPattern("dd")))
                 .replace("%date.hour%", now.format(DateTimeFormatter.ofPattern("HH")))
                 .replace("%date.minute%", now.format(DateTimeFormatter.ofPattern("mm")))
+                .replace("%server.money%", config.money.money)
+                .replace("%server.cash%", config.money.cash)
                 .trim()
         }
     }

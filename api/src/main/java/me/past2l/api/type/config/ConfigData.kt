@@ -9,4 +9,5 @@ data class ConfigData(
     val tabList: ConfigTabList = ConfigTabList(),
     val scoreboard: ConfigScoreboard = ConfigScoreboard(),
     val motd: ConfigMOTD = ConfigMOTD(),
+    val money: ConfigMoney = ConfigMoney(),
 )

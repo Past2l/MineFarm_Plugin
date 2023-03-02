@@ -9,7 +9,7 @@ import me.past2l.minefarm.type.gui.GUIShopItem
 import me.past2l.minefarm.type.shop.ShopInteraction
 import me.past2l.api.util.Config
 import me.past2l.minefarm.type.config.ConfigData
-import me.past2l.minefarm.type.config.ConfigMoney
+import me.past2l.api.type.config.ConfigMoney
 import me.past2l.minefarm.type.config.text.ConfigText
 import me.past2l.minefarm.type.config.text.ConfigTextShop
 import org.bukkit.entity.Player
@@ -28,12 +28,11 @@ class Config: Config() {
         lateinit var tabList: ConfigTabList
         lateinit var scoreboard: ConfigScoreboard
         lateinit var motd: ConfigMOTD
-
-        lateinit var text: ConfigText
         lateinit var money: ConfigMoney
 
+        lateinit var text: ConfigText
+
         fun init() = API.init {
-            val money = it?.get("money") as HashMap<*, *>?
             val text = it?.get("text") as HashMap<*, *>?
             val shopText = text?.get("shop") as HashMap<*, *>?
             val default = ConfigData()
@@ -42,10 +41,6 @@ class Config: Config() {
 
             config = if (forceReplace) default
             else ConfigData(
-                money = ConfigMoney(
-                    money = money?.get("money")?.toString() ?: default.money.money,
-                    cash = money?.get("cash")?.toString() ?: default.money.cash,
-                ),
                 text = ConfigText(
                     shop = ConfigTextShop(
                         item = shopText?.get("item")?.toString() ?: default.text.shop.item,
@@ -67,17 +62,13 @@ class Config: Config() {
             this.tabList = API.config.tabList
             this.scoreboard = API.config.scoreboard
             this.motd = API.config.motd
+            this.money = API.config.money
 
-            this.money = config.money
             this.text = config.text
         }
 
         fun save() = API.save point@{
             return@point hashMapOf(
-                "money" to hashMapOf(
-                    "money" to config.money.money,
-                    "cash" to config.money.cash,
-                ),
                 "text" to hashMapOf(
                     "shop" to hashMapOf(
                         "item" to config.text.shop.item,
@@ -167,8 +158,7 @@ class Config: Config() {
                         )
                 }
             }
-            return@point result.replace("%server.money%", config.money.money)
-                .replace("%server.cash%", config.money.cash)
+            return@point result
         }
     }
 }
