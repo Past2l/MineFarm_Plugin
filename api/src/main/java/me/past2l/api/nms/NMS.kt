@@ -6,13 +6,11 @@ import me.past2l.api.type.entity.FakePlayer
 import me.past2l.api.util.Logger
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
 class NMS {
     companion object {
         private val plugin = PluginManager.plugin
         private var nms: NMS? = null
-        private var load = false
 
         fun getVersion(): String = Bukkit.getServer().javaClass.`package`.name.split(".")[3]
 
@@ -23,14 +21,14 @@ class NMS {
                 "v1_19_R1" -> v1_19_R1(plugin)
                 else -> null
             }
-            if (nms != null) {
+            return if (nms != null) {
                 Logger.log("§aNMS§r loading completed.")
                 Logger.log("§aNMS§r Verson : §e${getVersion()}§r")
-                return true
+                true
             } else {
                 Logger.error("This plugin does not currently support Minecraft versions.")
                 Bukkit.getPluginManager().disablePlugin(plugin)
-                return false
+                false
             }
         }
 

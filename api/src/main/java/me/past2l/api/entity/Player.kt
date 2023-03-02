@@ -1,6 +1,5 @@
 package me.past2l.api.entity
 
-import me.past2l.api.PluginManager
 import me.past2l.api.gui.GUI
 import me.past2l.api.gui.Scoreboard
 import me.past2l.api.gui.TabList
@@ -14,7 +13,6 @@ import kotlin.collections.HashMap
 
 class Player {
     companion object {
-        private val plugin = PluginManager.plugin
         val gui: HashMap<UUID, GUI> = HashMap()
         val data: HashMap<UUID, PlayerData> = HashMap()
 
@@ -37,6 +35,7 @@ class Player {
                 prefix = data?.get("prefix")?.toString() ?: default.prefix,
                 money = data?.get("money")?.toString()?.toDouble() ?: default.money,
                 cash = data?.get("cash")?.toString()?.toDouble() ?: default.cash,
+                like = data?.get("like")?.toString()?.toDouble() ?: default.like,
                 playtime = data?.get("playtime")?.toString()?.toDouble() ?: default.playtime,
                 lastPlayed = if (lastPlayed != null)
                     ZonedDateTime.parse(lastPlayed)
@@ -51,6 +50,7 @@ class Player {
                     saveData.prefix + "&r" else saveData.prefix,
                 "money" to saveData.money,
                 "cash" to saveData.cash,
+                "like" to saveData.like,
                 "playtime" to saveData.playtime,
                 "lastPlayed" to saveData.lastPlayed.toString(),
             )

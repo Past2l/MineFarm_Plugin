@@ -1,6 +1,7 @@
 package me.past2l.minefarm.util
 
 import me.past2l.api.type.config.ConfigEnable
+import me.past2l.api.type.config.ConfigMOTD
 import me.past2l.api.type.config.ConfigScoreboard
 import me.past2l.api.type.config.ConfigTabList
 import me.past2l.api.type.entity.NPCData
@@ -26,6 +27,8 @@ class Config: Config() {
         lateinit var enable: ConfigEnable
         lateinit var tabList: ConfigTabList
         lateinit var scoreboard: ConfigScoreboard
+        lateinit var motd: ConfigMOTD
+
         lateinit var text: ConfigText
         lateinit var money: ConfigMoney
 
@@ -63,6 +66,7 @@ class Config: Config() {
             this.enable = API.config.enable
             this.tabList = API.config.tabList
             this.scoreboard = API.config.scoreboard
+            this.motd = API.config.motd
 
             this.money = config.money
             this.text = config.text

@@ -6,6 +6,7 @@ import me.past2l.api.type.interact.Interaction
 import me.past2l.api.util.Config
 import me.past2l.api.util.Logger
 import me.past2l.api.util.Skin
+import me.past2l.minefarm.gui.CustomGUI
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -127,8 +128,6 @@ class CustomNPCCommand: CommandExecutor, TabExecutor {
                 if (args.size < 4) sender.sendMessage(help["set"])
                 else if (CustomNPC.config[args[1]] == null)
                     sender.sendMessage("§c존재하지 않는 NPC입니다.§r")
-                else if (false) // Check GUI ID
-                    sender.sendMessage("§c존재하지 않는 GUI ID입니다.§r")
                 else {
                     val data = CustomNPC.config[args[1]]!!
                     when (args[2]) {
@@ -159,12 +158,16 @@ class CustomNPCCommand: CommandExecutor, TabExecutor {
                             sender.sendMessage("§a${data.name}§r §8(ID : ${data.id})§r NPC의 스킨이 변경되었습니다.")
                         }
                         "gui" -> {
-                            data.interaction = Interaction("gui", args[3])
-                            CustomNPC.reload(data)
-                            Logger.log("&a${sender.name}&r 플레이어가 &e${data.name}&r " +
-                                "&6(ID : ${data.id})&r NPC의 상호작용을 변경하였습니다.")
-                            Logger.log("상호작용 타입 : &egui&r, 상호작용 ID : &e${args[3]}&r")
-                            sender.sendMessage("§a${data.name}§r §8(ID : ${data.id})§r NPC의 상호작용이 변경되었습니다.")
+                            if (CustomGUI.data[args[3]] == null)
+                                sender.sendMessage("§c존재하지 않는 GUI ID입니다.§r")
+                            else {
+                                data.interaction = Interaction("gui", args[3])
+                                CustomNPC.reload(data)
+                                Logger.log("&a${sender.name}&r 플레이어가 &e${data.name}&r " +
+                                    "&6(ID : ${data.id})&r NPC의 상호작용을 변경하였습니다.")
+                                Logger.log("상호작용 타입 : &egui&r, 상호작용 ID : &e${args[3]}&r")
+                                sender.sendMessage("§a${data.name}§r §8(ID : ${data.id})§r NPC의 상호작용이 변경되었습니다.")
+                            }
                         }
                         "text" -> {
                             val text = args.joinToString(" ")

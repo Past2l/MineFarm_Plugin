@@ -22,12 +22,14 @@ open class Config {
         lateinit var enable: ConfigEnable
         lateinit var tabList: ConfigTabList
         lateinit var scoreboard: ConfigScoreboard
+        lateinit var motd: ConfigMOTD
 
         fun init(option: ((HashMap<String, *>?) -> Unit)? = null) {
             val data = Yaml.read("config.yml")
             val enable = data?.get("enable") as HashMap<*, *>?
             val tabList = data?.get("tabList") as HashMap<*, *>?
             val scoreboard = data?.get("scoreboard") as HashMap<*, *>?
+            val motd = data?.get("motd") as HashMap<*, *>?
             val default = ConfigData()
 
             forceReplace = data?.get("forceReplace")?.toString()?.toBoolean() ?: false
@@ -52,6 +54,10 @@ open class Config {
                     title = scoreboard?.get("title")?.toString() ?: default.scoreboard.title,
                     content = scoreboard?.get("content") as ArrayList<String>? ?: default.scoreboard.content,
                 ),
+                motd = ConfigMOTD(
+                    content = motd?.get("content") as ArrayList<String>? ?: default.motd.content,
+                    center = motd?.get("center")?.toString()?.toBoolean() ?: default.motd.center,
+                )
             )
 
             this.serverName = config.serverName
@@ -61,6 +67,7 @@ open class Config {
             this.enable = config.enable
             this.tabList = config.tabList
             this.scoreboard = config.scoreboard
+            this.motd = config.motd
 
             option?.let { it(data) }
         }
@@ -84,6 +91,10 @@ open class Config {
                 "scoreboard" to hashMapOf(
                     "title" to config.scoreboard.title,
                     "content" to config.scoreboard.content,
+                ),
+                "motd" to hashMapOf(
+                    "content" to config.motd.content,
+                    "center" to config.motd.center,
                 ),
             )
             option?.let { data.putAll(it()) }

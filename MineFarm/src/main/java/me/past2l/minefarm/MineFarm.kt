@@ -4,10 +4,7 @@ import me.past2l.api.PluginManager
 import me.past2l.minefarm.entity.CustomNPC
 import me.past2l.api.entity.NPC
 import me.past2l.api.entity.Player
-import me.past2l.api.event.GUIEvent
-import me.past2l.api.event.NPCEvent
-import me.past2l.api.event.PacketEvent
-import me.past2l.api.event.PlayerEvent
+import me.past2l.api.event.*
 import me.past2l.api.gui.Scoreboard
 import me.past2l.api.gui.TabList
 import me.past2l.api.nms.NMS
@@ -25,6 +22,30 @@ import org.bukkit.Difficulty
 import org.bukkit.plugin.java.JavaPlugin
 
 class MineFarm: JavaPlugin() {
+    private val commands = hashMapOf(
+        TestCommand.name to TestCommand(),
+        CustomNPCCommand.name to CustomNPCCommand(),
+        CustomGUICommand.name to CustomGUICommand(),
+        EnderChestGUICommand.name to EnderChestGUICommand(),
+    )
+    private val events = arrayOf(
+        NPCEvent(),
+        GUIEvent(),
+        PlayerEvent(),
+        PacketEvent(),
+        MOTDEvent(),
+    )
+    private val gameRules = hashMapOf(
+        "difficulty" to "normal",
+        "announceAdvancements" to "false",
+        "commandBlockOutPut" to "false",
+        "doFireTick" to "false",
+        "doMobSpawning" to "false",
+        "spawnRadius" to "0",
+        "disableRaids" to "false",
+        "doInsomnia" to "false",
+    )
+
     override fun onEnable() {
         PluginManager.init(this)
         Config.init()
@@ -48,14 +69,10 @@ class MineFarm: JavaPlugin() {
     }
 
     private fun initCommands() {
-        getCommand(TestCommand.name)?.executor = TestCommand()
-        getCommand(TestCommand.name)?.tabCompleter = TestCommand()
-        getCommand(CustomNPCCommand.name)?.executor = CustomNPCCommand()
-        getCommand(CustomNPCCommand.name)?.tabCompleter = CustomNPCCommand()
-        getCommand(CustomGUICommand.name)?.executor = CustomGUICommand()
-        getCommand(CustomGUICommand.name)?.tabCompleter = CustomGUICommand()
-        getCommand(EnderChestGUICommand.name)?.executor = EnderChestGUICommand()
-        getCommand(EnderChestGUICommand.name)?.tabCompleter = EnderChestGUICommand()
+        commands.map {
+            getCommand(it.key)?.executor = it.value
+            getCommand(it.key)?.tabCompleter = it.value
+        }
     }
 
     private fun initEvents() {
@@ -63,10 +80,7 @@ class MineFarm: JavaPlugin() {
             CustomNPC.onInteractNPC(player, packet)
         }
         Packet.init()
-        server.pluginManager.registerEvents(NPCEvent(), this)
-        server.pluginManager.registerEvents(GUIEvent(), this)
-        server.pluginManager.registerEvents(PlayerEvent(), this)
-        server.pluginManager.registerEvents(PacketEvent(), this)
+        events.map { server.pluginManager.registerEvents(it, this) }
     }
 
     private fun removeEvents() {
@@ -82,15 +96,15 @@ class MineFarm: JavaPlugin() {
 
     private fun initGameRules() {
         Bukkit.getWorlds().forEach {
-            it.difficulty = Difficulty.NORMAL
-            it.setGameRuleValue("announceAdvancements", "false")
-            it.setGameRuleValue("keepInventory", "true")
-            it.setGameRuleValue("commandBlockOutPut", "false")
-            it.setGameRuleValue("doFireTick", "false")
-            it.setGameRuleValue("doMobSpawning", "false")
-            it.setGameRuleValue("spawnRadius", "0")
-            it.setGameRuleValue("disableRaids", "false")
-            it.setGameRuleValue("doInsomnia", "false")
+            it.difficulty = when (gameRules["difficulty"]?.lowercase()) {
+                "peaceful" -> Difficulty.PEACEFUL
+                "easy" -> Difficulty.EASY
+                "normal" -> Difficulty.NORMAL
+                "hard" -> Difficulty.HARD
+                else -> Difficulty.NORMAL
+            }
+            gameRules.remove("difficulty")
+            gameRules.map { v -> it.setGameRuleValue(v.key, v.value) }
         }
     }
 

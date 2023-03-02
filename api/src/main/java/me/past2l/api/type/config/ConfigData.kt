@@ -8,4 +8,5 @@ data class ConfigData(
     val enable: ConfigEnable = ConfigEnable(),
     val tabList: ConfigTabList = ConfigTabList(),
     val scoreboard: ConfigScoreboard = ConfigScoreboard(),
+    val motd: ConfigMOTD = ConfigMOTD(),
 )
