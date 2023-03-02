@@ -89,7 +89,8 @@ class Config: Config() {
             npc: NPCData? = null,
             shopItem: GUIShopItem? = null,
             shopInteraction: ShopInteraction? = null,
-        ) = API.format(str, player) point@{
+            trim: Boolean? = true,
+        ) = API.format(str, player, trim) point@{
             var result = it
             if (npc != null) {
                 result = result.replace("%npc.id%", npc.id)

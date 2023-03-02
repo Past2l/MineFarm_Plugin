@@ -114,6 +114,7 @@ open class Config {
         fun format(
             str: String?,
             player: Player? = null,
+            trim: Boolean? = true,
             option: ((String) -> String)? = null
         ): String {
             var result = str ?: return ""
@@ -138,7 +139,7 @@ open class Config {
                     .replace("%player.like%", DecimalFormat("#,###").format(playerData.like))
             }
             option?.let { result = it(result) }
-            return result
+            result = result
                 .replace("\\&", temp)
                 .replace("&", "§")
                 .replace(temp, "&")
@@ -151,7 +152,7 @@ open class Config {
                 .replace("%date.minute%", now.format(DateTimeFormatter.ofPattern("mm")))
                 .replace("%server.money%", config.money.money)
                 .replace("%server.cash%", config.money.cash)
-                .trim()
+            return if (trim == true) result.trim() else result
         }
     }
 }

@@ -20,7 +20,7 @@ class Scoreboard {
             objective?.displaySlot = DisplaySlot.SIDEBAR
             val text = Config.scoreboard.content.reversed()
             for (idx in text.indices)
-                objective?.getScore(Config.format(text[idx], player))?.score = idx
+                objective?.getScore(Config.format(text[idx], player, trim = false))?.score = idx
             if (scoreboard != null)
                 player.scoreboard = scoreboard
         }
