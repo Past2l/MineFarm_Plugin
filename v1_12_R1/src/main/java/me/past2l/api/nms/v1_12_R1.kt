@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandlerContext
 import me.past2l.api.type.nms.NMS
 import me.past2l.api.type.entity.FakePlayer
 import net.minecraft.server.v1_12_R1.*
+import net.minecraft.server.v1_12_R1.IChatBaseComponent.ChatSerializer
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_12_R1.CraftServer
 import org.bukkit.craftbukkit.v1_12_R1.CraftWorld
@@ -18,11 +19,17 @@ import java.util.HashMap
 class v1_12_R1(val plugin: JavaPlugin): NMS {
     private val npcs: HashMap<String, EntityPlayer> = hashMapOf()
 
+    private fun stringToComponent(str: String): String {
+        return "[${str.split("\n").joinToString(",") {
+            "{\"text\":\"${it}\"}"
+        }}]"
+    }
+
     override fun setTabList(player: Player, header: String, footer: String) {
         val connection = (player as CraftPlayer).handle.playerConnection
         val packet = PacketPlayOutPlayerListHeaderFooter()
-        setValue(packet, "a", ChatComponentText(header))
-        setValue(packet, "b", ChatComponentText(footer))
+        setValue(packet, "a", ChatSerializer.a(stringToComponent(header))!!)
+        setValue(packet, "b", ChatSerializer.a(stringToComponent(footer))!!)
         connection.sendPacket(packet)
     }
 
