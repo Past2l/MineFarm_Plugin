@@ -113,6 +113,11 @@
         <!-- API -->
         <dependency>
             <groupId>me.past2l</groupId>
+            <artifactId>type</artifactId>
+            <version>type</version>
+        </dependency>
+        <dependency>
+            <groupId>me.past2l</groupId>
             <artifactId>api</artifactId>
             <version>api</version>
         </dependency>
