@@ -11,11 +11,8 @@ import me.past2l.api.nms.NMS
 import me.past2l.api.packet.Packet
 import me.past2l.api.scheduler.NPCSkinReloadScheduler
 import me.past2l.api.scheduler.GUILoadScheduler
+import me.past2l.minefarm.command.*
 import me.past2l.minefarm.util.Config
-import me.past2l.minefarm.command.CustomGUICommand
-import me.past2l.minefarm.command.CustomNPCCommand
-import me.past2l.minefarm.command.EnderChestGUICommand
-import me.past2l.minefarm.command.TestCommand
 import me.past2l.minefarm.gui.CustomGUI
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty
@@ -27,6 +24,8 @@ class MineFarm: JavaPlugin() {
         CustomNPCCommand.name to CustomNPCCommand(),
         CustomGUICommand.name to CustomGUICommand(),
         EnderChestGUICommand.name to EnderChestGUICommand(),
+        AdminCommand.name to AdminCommand(),
+        PlayerCommand.name to PlayerCommand(),
     )
     private val events = arrayOf(
         NPCEvent(),

@@ -18,6 +18,12 @@ commands:
   ender_chest:
     description: Command for Open Ender Chest.
     permission: minefarm.ender_chest
+  admin:
+    description: Command for Admin GUI.
+    permission: minefarm.admin
+  player:
+    description: Command for Manage Player.
+    permission: minefarm.player
 
 permissions:
   minefarm.*:
@@ -27,6 +33,8 @@ permissions:
       minefarm.npc: true
       minefarm.gui: true
       minefarm.ender_chest: true
+      minefarm.admin: true
+      minefarm.player: true
   minefarm.test:
     description: Give access to use MineFarm Test Command
     default: op
@@ -38,4 +46,10 @@ permissions:
     default: op
   minefarm.ender_chest:
     description: Give access to use MineFarm Chest Command
+    default: op
+  minefarm.admin:
+    description: Give access to use MineFarm Admin Command
+    default: op
+  minefarm.player:
+    description: Give access to use MineFarm Player Command
     default: op

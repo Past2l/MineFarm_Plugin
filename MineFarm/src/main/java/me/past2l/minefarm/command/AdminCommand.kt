@@ -1,15 +1,15 @@
 package me.past2l.minefarm.command
 
-import me.past2l.minefarm.gui.EnderChestGUI
+import me.past2l.minefarm.gui.AdminGUI
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 import org.bukkit.entity.Player
 
-class EnderChestGUICommand: CommandExecutor, TabExecutor {
+class AdminCommand: CommandExecutor, TabExecutor {
     companion object {
-        const val name = "ender_chest"
+        const val name = "admin"
     }
 
     override fun onTabComplete(
@@ -21,14 +21,10 @@ class EnderChestGUICommand: CommandExecutor, TabExecutor {
         return mutableListOf()
     }
 
-    override fun onCommand(
-        sender: CommandSender?,
-        command: Command?,
-        label: String?,
-        args: Array<out String>
-    ): Boolean {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) return false
-        EnderChestGUI.open(sender)
+        if (!sender.isOp) sender.sendMessage("§cPermission Denied.§r")
+        else AdminGUI.open(sender)
         return true
     }
 }
