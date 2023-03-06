@@ -1,4 +1,4 @@
-package me.past2l.minefarm.util
+package me.past2l.minefarm.config
 
 import me.past2l.api.type.config.ConfigEnable
 import me.past2l.api.type.config.ConfigMOTD
@@ -7,7 +7,7 @@ import me.past2l.api.type.config.ConfigTabList
 import me.past2l.api.type.entity.NPCData
 import me.past2l.minefarm.type.gui.GUIShopItem
 import me.past2l.minefarm.type.shop.ShopInteraction
-import me.past2l.api.util.Config
+import me.past2l.api.config.Config
 import me.past2l.minefarm.type.config.ConfigData
 import me.past2l.api.type.config.ConfigMoney
 import me.past2l.minefarm.type.config.text.ConfigText
@@ -22,6 +22,7 @@ class Config: Config() {
 
         lateinit var serverName: String
         lateinit var timezone: String
+        lateinit var resourcePack: String
         lateinit var consolePrefix: String
         lateinit var chat: String
         lateinit var enable: ConfigEnable
@@ -54,17 +55,18 @@ class Config: Config() {
                 ),
             )
 
-            this.serverName = API.config.serverName
-            this.timezone = API.config.timezone
-            this.consolePrefix = API.config.consolePrefix
-            this.chat = API.config.chat
-            this.enable = API.config.enable
-            this.tabList = API.config.tabList
-            this.scoreboard = API.config.scoreboard
-            this.motd = API.config.motd
-            this.money = API.config.money
+            serverName = API.config.serverName
+            timezone = API.config.timezone
+            resourcePack = API.config.resourcePack
+            consolePrefix = API.config.consolePrefix
+            chat = API.config.chat
+            enable = API.config.enable
+            tabList = API.config.tabList
+            scoreboard = API.config.scoreboard
+            motd = API.config.motd
+            money = API.config.money
 
-            this.text = config.text
+            MineFarm.text = config.text
         }
 
         fun save() = API.save point@{

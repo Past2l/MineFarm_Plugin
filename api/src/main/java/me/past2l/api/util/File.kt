@@ -42,5 +42,12 @@ class File {
             val file = File(plugin.dataFolder, path)
             return file.delete()
         }
+
+        fun checksumToString(b: ByteArray): String {
+            var result = ""
+            for (i in b.indices)
+                result += ((b[i].toInt() and 0xff) + 0x100).toString(16).substring(1)
+            return result
+        }
     }
 }

@@ -12,7 +12,7 @@ import me.past2l.api.packet.Packet
 import me.past2l.api.scheduler.NPCSkinReloadScheduler
 import me.past2l.api.scheduler.GUILoadScheduler
 import me.past2l.minefarm.command.*
-import me.past2l.minefarm.util.Config
+import me.past2l.minefarm.config.Config
 import me.past2l.minefarm.gui.CustomGUI
 import org.bukkit.Bukkit
 import org.bukkit.Difficulty

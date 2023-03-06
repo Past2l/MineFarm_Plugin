@@ -10,7 +10,7 @@ import me.past2l.minefarm.type.shop.ShopInteraction
 import me.past2l.api.util.File
 import me.past2l.api.util.Item
 import me.past2l.api.util.Yaml
-import me.past2l.minefarm.util.Config
+import me.past2l.minefarm.config.Config
 import org.bukkit.entity.Player
 
 class CustomGUI {

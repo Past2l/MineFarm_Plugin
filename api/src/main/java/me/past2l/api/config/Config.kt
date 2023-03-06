@@ -1,6 +1,7 @@
-package me.past2l.api.util
+package me.past2l.api.config
 
 import me.past2l.api.type.config.*
+import me.past2l.api.util.Yaml
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.io.Serializable
@@ -17,6 +18,7 @@ open class Config {
 
         lateinit var serverName: String
         lateinit var timezone: String
+        lateinit var resourcePack: String
         lateinit var consolePrefix: String
         lateinit var chat: String
         lateinit var enable: ConfigEnable
@@ -39,6 +41,7 @@ open class Config {
             else ConfigData(
                 serverName = data?.get("serverName")?.toString() ?: default.serverName,
                 timezone = data?.get("timezone")?.toString() ?: default.timezone,
+                resourcePack = data?.get("resourcePack")?.toString() ?: default.resourcePack,
                 consolePrefix = data?.get("consolePrefix")?.toString() ?: default.consolePrefix,
                 chat = data?.get("chat")?.toString() ?: default.chat,
                 enable = ConfigEnable(
@@ -67,6 +70,7 @@ open class Config {
 
             this.serverName = config.serverName
             this.timezone = config.timezone
+            this.resourcePack = config.resourcePack
             this.consolePrefix = config.consolePrefix
             this.chat = config.chat
             this.enable = config.enable
@@ -80,6 +84,7 @@ open class Config {
         fun save(option: (() -> HashMap<String, Serializable>)? = null) {
             val data = hashMapOf(
                 "serverName" to config.serverName,
+                "resourcePack" to config.resourcePack,
                 "timezone" to config.timezone,
                 "consolePrefix" to config.consolePrefix,
                 "chat" to config.chat,
